@@ -26,17 +26,17 @@ public class Ecker_Hausi {
         boolean keepRunning = true;
         int numberofSteps = 1;
 
-        while (keepRunning || numberofSteps < 4) {
+        while (keepRunning || numberofSteps < 5) {
             char currenKeypress;
             KeyStroke keyPressed = screen.readInput();
             currenKeypress = keyPressed.getCharacter();
-            buildHouse(tg, numberofSteps, terminal);
+            buildHouse(tg, numberofSteps, terminal, screen);
             numberofSteps++;
             screen.refresh();
         }
     }
 
-    private static void buildHouse(TextGraphics tg, int numberOfSteps, Terminal terminal) {
+    private static void buildHouse(TextGraphics tg, int numberOfSteps, Terminal terminal, Screen screen) throws IOException {
         switch (numberOfSteps) {
             case 1:
                 houseBlock(tg, terminal);
@@ -49,7 +49,20 @@ public class Ecker_Hausi {
                 break;
             case 4:
                 housWindows(tg, terminal);
+                break;
+            case 5:
+                ende(tg, terminal, screen);
+                break;
+            case 6:
+                screen.stopScreen();
+                break;
         }
+
+    }
+
+    private static void ende(TextGraphics tg, Terminal terminal, Screen screen) throws IOException {
+        tg.putString(3,78,"Das Haus ist Fertig gebaut, um das Programm zu beenden drücken Sie noch mal eine Taste");
+        screen.refresh();
 
     }
 
